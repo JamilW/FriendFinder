@@ -1,9 +1,22 @@
 const express = require("express");
 const path = require("path");
+const app = express();
 
 const PORT = process.env.PORT || 8085;
 
-const server = http.createServer(handleRequest);
+
+app.use(express.static("./app/public"));
+
+// 'use strict';
+ 
+// var rootCas = require('ssl-root-cas/latest').create();
+ 
+// // rootCas
+// //   .addFile(__dirname + '/ssl/01-cheap-ssl-intermediary-a.pem')
+// //   .addFile(__dirname + '/ssl/02-cheap-ssl-intermediary-b.pem')
+// //   ;
+//   require('https').globalAgent.options.ca = rootCas;
+// const server = http.createServer(handleRequest);
     
 // function handleRequest(req, res)    {
 //     var path = req.url;
@@ -23,6 +36,9 @@ const server = http.createServer(handleRequest);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-server.listen(PORT, function()  {
+require("./app/routing/apiRoutes")(app);
+require("./app/routing/htmlRoutes")(app);
+
+app.listen(PORT, function()  {
     console.log("Server listening on: http://localhost" + PORT);
 });
