@@ -1,6 +1,9 @@
 const express = require("express");
 const path = require("path");
 const app = express();
+const survey = require('./app/data/survey');
+const friends = require('./app/data/friends');
+const apiRoutes = require('./app/routing/apiRoutes');
 
 const PORT = process.env.PORT || 8085;
 
